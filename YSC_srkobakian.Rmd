@@ -1,0 +1,292 @@
+---
+title: "Australia: a new perspective"
+author: "Stephanie Kobakian <br> @srkobakian [`r icon::fa_twitter()`](https://twitter.com/srkobakian) <br> Queensland University of Technology <br> Monash University"
+output:
+  xaringan::moon_reader:
+    css: ["sugarbag.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE, message = FALSE, warning = FALSE, echo = FALSE)
+```
+class: top, center
+
+background-image: url(figures/atlas.png)
+background-position: 50% 50%
+background-size: 70%
+
+
+# Australian Cancer Atlas
+
+???
+(Title slide)
+Good morning, my name is Stephanie.
+I want to start by saying thank you to the organisers for this opportunity to speak to you today.
+I am a Research Masters student at QUT, working with Prof. Kerrie Mengersen and Dr. Earl Duncan. This work is also co-supervised by Prof. Dianne Cook at Monash University.
+
+(Atlas slide)
+I have been focused on visual statistics, specifically how our use of maps or alternative visualisations allows us to see spatial distributions.
+
+This work was inspired by the Australian Cancer Atlas.
+This is an online, interactive web tool for exploring the impact of cancer on Australia, through the visualisation of Incidence Rates and Excess Death Rates.
+---
+
+class: top, center
+
+background-image: url(figures/aus.png)
+background-position: 50% 50%
+background-size: 80%
+
+# States and Territories
+
+???
+These coloured regions are the states and territories of Australia.
+They are coloured accoring to the amount of geographic land they occupy.
+The darkest colour on this map is the area in sqkms of Western Australia.
+
+---
+
+class: inverse, center, middle
+
+# Do we have a problem?
+
+---
+
+class: top, center
+
+background-image: url(figures/quote.png)
+background-position: 50% 50%
+background-size: 80%
+
+???
+To paraphrase Kahneman:
+We treate the limited information we have as if it were all there is to know.
+We build the best possible stories from the information available to us and if it is a good story, we believe it."
+
+We give our attention to what is observable, 
+here the largest state with the darkest colour draws our attention.
+
+---
+
+class: center, top
+
+background-image: url(figures/aus.png)
+background-position: 50% 50%
+background-size: 80%
+
+# What are we missing?
+
+---
+class: center, top
+
+background-image: url(figures/aus_states.png)
+background-position: 50% 50%
+background-size: 80%
+
+# Australian Capital Territory
+
+???
+The Australian Capital Territory is extremely important in Australia.
+For one, Canberra is the capital city, and the location of the conference.
+More importantly it is where our Representative and Senators come to govern our country.
+
+---
+
+class: top, center
+background-image: url(https://media.giphy.com/media/XUtDnQwGaz1YI/giphy.gif)
+background-position: 50% 50%
+background-size: 80%
+
+# Where are the people?
+
+???
+This map may be appropriate in some cases, but for our work, we are interested in the spatial distribution of cancer, and cancer affects people.
+
+---
+
+background-image: url(figures/aus_sa4.png)
+background-position: 50% 50%
+background-size: 80%
+
+???
+These are statistical areas, at level 4. These are part of the Australian Statistical Geography Standard created and used by the Australian Bureau of Statistics.
+In regional areas, SA4s tend to have populations closer to the minimum (100,000 - 300,000)
+In metropolitan areas, the SA4s tend to have larger populations (300,000 - 500,000). 
+
+---
+
+background-image: url(figures/aus_sa3.png)
+background-position: 50% 50%
+background-size: 80%
+ 
+???
+SA3s are more flexible, they have between 30,000 and 130,000 persons.
+---
+
+background-image: url(figures/aus_sa2.png)
+background-position: 50% 50%
+background-size: 80%
+
+???
+SA2s generally have 3,000 to 25,000 people. These are functional communities, like rural town centres, or metropolitan suburbs.
+We can use this idea of small communities to drive research into the spatial distribution of cancers across Australians, by comparing and smoothing across communities.
+
+---
+
+
+class:inverse, top, center
+
+background-image: url(figures/aus_liver_f.png)
+background-position: 50% 50%
+background-size: 50%
+
+
+# Liver cancer across the land
+
+---
+
+
+class:inverse, top, center
+
+background-image: url(figures/sa2_lung.png)
+background-position: 50% 50%
+background-size: 50%
+
+
+# Lung cancer across the land
+
+???
+
+This is not good!
+Goals: focus on the people
+
+Does this change as we look deeper?
+
+
+
+---
+
+class:inverse, top, center
+
+background-image: url(figures/aus_grid.png)
+background-position: 50% 50%
+background-size: 90%
+
+
+# A different perspective
+
+???
+When the goal is to see the population, there are several visualisation methods that have been developed.
+This display shows a contiguous cartogram, noncontiguous cartogram, dorling cartogram and a hexagon tile map.
+---
+class:inverse, top, center
+
+
+background-image: url(figures/hex_lung.png)
+background-position: 50% 50%
+background-size: 50%
+
+
+---
+class:inverse, top, center
+
+
+background-image: url(figures/sugarbag.png)
+background-position: 50% 50%
+background-size: 50%
+
+---
+class:inverse, top, center
+
+background-image: url(figures/tas_centroids.png)
+background-position: 50% 50%
+background-size: 80%
+
+# Tasmania: 98 SA2 regions
+---
+class: top, center
+
+background-image: url(figures/tas_1grid.png)
+background-position: 50% 50%
+background-size: 80%
+
+# Create a square grid
+
+---
+class:inverse, top, center
+
+background-image: url(figures/tas_2hexgrid.png)
+background-position: 50% 50%
+background-size: 80%
+
+# Create a hexagon grid
+
+---
+class:inverse, top, center
+
+background-image: url(figures/tas_3buffer.png)
+background-position: 50% 50%
+background-size: 80%
+
+# Strategic buffering
+
+---
+class:inverse, top, center
+
+background-image: url(figures/tas_4centroid1.png)
+background-position: 50% 50%
+background-size: 80%
+
+# Begin allocating centroids
+
+---
+class:inverse, top, center
+
+background-image: url(figures/tas_5centroid1.png)
+background-position: 50% 50%
+background-size: 80%
+
+# Circular filter
+
+---
+class:inverse, top, center
+
+background-image: url(figures/tas_6centroid1.png)
+background-position: 50% 50%
+background-size: 80%
+
+# Pie slice filter
+
+---
+class:inverse, top, center
+
+background-image: url(figures/tas_7centroid1.png)
+background-position: 50% 50%
+background-size: 80%
+
+# Closest available point
+
+---
+class:inverse, top, center
+
+background-image: url(figures/tas_8centroid1.png)
+background-position: 50% 50%
+background-size: 80%
+
+# Pie slice filter
+
+---
+class:inverse, top, center
+
+background-image: url(figures/tas_9end.png)
+background-position: 50% 50%
+background-size: 80%
+
+# Final product
+
+---
