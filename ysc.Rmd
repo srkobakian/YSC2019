@@ -4,6 +4,7 @@ author: "Stephanie Kobakian <br> srkobakian [`r icon::fa_twitter()`](https://twi
 output:
   xaringan::moon_reader:
     css: ["sugarbag.css"]
+    seal: false
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -113,6 +114,7 @@ background-image: url(figures/aus_sa4.png)
 background-position: 50% 75%
 background-size: 80%
 
+# SA4
 ???
 These are statistical areas, at level 4. These are part of the Australian Statistical Geography Standard created and used by the Australian Bureau of Statistics.
 In regional areas, SA4s tend to have populations closer to the minimum (100,000 - 300,000)
@@ -123,7 +125,8 @@ In metropolitan areas, the SA4s tend to have larger populations (300,000 - 500,0
 background-image: url(figures/aus_sa3.png)
 background-position: 50% 75%
 background-size: 80%
- 
+
+# SA3
 ???
 SA3s are more flexible, they have between 30,000 and 130,000 persons.
 ---
@@ -132,6 +135,8 @@ background-image: url(figures/aus_sa2.png)
 background-position: 50% 75%
 background-size: 80%
 
+# SA2
+
 ???
 SA2s generally have 3,000 to 25,000 people. These are functional communities, like rural town centres, or metropolitan suburbs.
 We can use this idea of small communities to drive research into the spatial distribution of cancers across Australians, by comparing and smoothing across communities.
@@ -139,83 +144,59 @@ We can use this idea of small communities to drive research into the spatial dis
 ---
 
 
-class: top, center
+class: bottom, center
 
 background-image: url(figures/aus_liver_f.png)
-background-position: 50% 75%
-background-size: 50%
+background-position: 50% 10%
+background-size: 70%
 
 
-# Liver cancer across the land
-## SIR for females
+## Liver cancer across the land
+Incidence for females
 ---
 
 
-class: top, center
+class: bottom, center
 
 background-image: url(figures/aus_liver_f_hex.png)
-background-position: 50% 75%
-background-size: 50%
+background-position: 50% 10%
+background-size: 70%
 
 
-# Liver cancer in hexagons
-## SIR for females
+## Liver cancer in hexagons
+Incidence for females
 
 ---
 
 
-class: top, center
+class: bottom, center
 
 background-image: url(figures/aus_liver_m.png)
-background-position: 50% 75%
-background-size: 50%
+background-position: 50% 10%
+background-size: 70%
 
 
-# Liver cancer across the land
-## SIR for males
+## Liver cancer across the land
+Incidence for males
 ---
 
 
-class: top, center
+class: bottom, center
 
 background-image: url(figures/aus_liver_m_hex.png)
-background-position: 50% 75%
-background-size: 50%
+background-position: 50% 10%
+background-size: 70%
 
 
-# Liver cancer in hexagons
-## SIR for males
+## Liver cancer in hexagons
+Incidence for males
 ---
-class: top, center
-
-background-image: url(figures/aus_lung_p.png)
-background-position: 50% 75%
-background-size: 50%
-
-
-# Lung cancer across the land
-## SIR for persons
-
----
-
-class: top, center
-
-background-image: url(figures/aus_lung_p_hex.png)
-background-position: 50% 75%
-background-size: 50%
-
-
-# Lung cancer in hexagons
-## SIR for persons
-
----
-
 
 class: top, center
 
 background-image: url(figures/aus_melanoma_p.png)
-background-position: 50% 75%
-background-size: 50%
+background-position: 50% 10%
+background-size: 70%
 
 
 # Melanoma cancer
@@ -226,35 +207,25 @@ background-size: 50%
 class: top, center
 
 background-image: url(figures/aus_melanoma_p_hex.png)
-background-position: 50% 75%
-background-size: 50%
+background-position: 50% 10%
+background-size: 70%
 
 
 # Melanoma cancer
 ## SIR for persons
 
 ---
-
-class: top, center
-
-background-image: url(figures/aus_grid.png)
-background-position: 50% 75%
-background-size: 80%
-
-
-# A different perspective
-
-???
-When the goal is to see the population, there are several visualisation methods that have been developed.
-This display shows a contiguous cartogram, noncontiguous cartogram, dorling cartogram and a hexagon tile map.
-
----
 class: top, center
 
 
 background-image: url(figures/sugarbag.png)
-background-position: 50% 75%
+background-position: 50% 80%
 background-size: 60%
+
+
+???
+When the goal is to see the population, there are several visualisation methods that have been developed.
+This display shows a contiguous cartogram, noncontiguous cartogram, dorling cartogram and a hexagon tile map.
 
 ---
 class: top, center
@@ -352,3 +323,18 @@ class: inverse, centre, middle
 ## Prof. Di Cook
 ## Prof. Kerrie Mengersen
 ## Dr Earl Duncan
+
+---
+
+class: inverse middle center
+
+### `r icon::fa_users()` [Di Cook](http://dicook.org) and 
+[Australian Cancer Atlas](https://atlas.cancer.org.au/) 
+
+### Slides created via xaringan <i class="fas fa-user-ninja"></i> <http://slides.earo.me/jsm18>
+
+### Slides `r icon::fa_github()` [srkobakian/YSC2019](https://github.com/srkobakian/YSC2019)
+
+### sugarbag `r icon::fa_github()``r icon::fa_box()` [srkobakian/sugarbag](https://github.com/srkobakian/sugarbag)
+
+### This work is under licensed [`r icon::fa("creative-commons")` BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).

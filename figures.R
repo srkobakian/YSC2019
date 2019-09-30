@@ -279,8 +279,7 @@ buffer_dist <- 2
 centroids <- sugarbag::create_centroids(shp_sf = tas_sa2, sf_id = sf_id)
 
 bbox <- tibble::tibble(min = c(min(centroids$longitude), min(centroids$latitude)),
-  max = c(max(centroids$longitude), max(centroids$latitude)))
-
+  max = c(max(centroids$longitude), max(centroids$latitude)))0
 ########################### Tas square grid
 
 grid <- tibble::as_tibble(expand.grid(hex_long = seq(bbox$min[1] - buffer_dist,
@@ -289,6 +288,15 @@ grid <- tibble::as_tibble(expand.grid(hex_long = seq(bbox$min[1] - buffer_dist,
   hex_lat = seq(bbox$min[2] - buffer_dist,
     bbox$max[2] + buffer_dist,
     hex_size)))
+
+t0 <- ggplot() + 
+  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "grey", colour = "white") + 
+  geom_point(aes(x=longitude, y = latitude), data= centroids, colour = "#2d4713") + theme_void() + 
+  coord_equal()
+
+ggsave(filename = "figures/tas_centroids.png", plot = t0,
+  device = "png", dpi = 300,  width = 10, height = 10)
+
 
 t1 <- ggplot() + 
   geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "grey", colour = "white") + 
@@ -714,4 +722,13 @@ end_cents <- ggplot() +
   coord_equal()
 
 
+full <- full_join(h1,p1)
 
+library(gganimate)
+full_anim <- ggplot(full) +  
+  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), fill = "grey", colour = "white") +
+  transition_states(poly_type, transition_length = 3, state_length = 1) +
+  enter_fade() +
+  exit_fade()
+
+animate(full_anim)
