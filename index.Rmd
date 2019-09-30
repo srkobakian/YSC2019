@@ -1,6 +1,6 @@
 ---
 title: "Maps, hexagons and life in Australia"
-author: "Stephanie Kobakian <br> srkobakian [`r icon::fa_twitter()`](https://twitter.com/srkobakian)[`r icon::fa_github()`](https://github.com/srkobakian) <br> <br> Queensland University of Technology <br> Monash University"
+author: "Stephanie Kobakian <br> srkobakian"
 output:
   xaringan::moon_reader:
     css: ["sugarbag.css"]
@@ -166,7 +166,7 @@ background-position: 50% 10%
 background-size: 70%
 
 
-## Liver cancer
+## Liver
 Incidence for females
 ---
 
@@ -178,7 +178,7 @@ background-position: 50% 10%
 background-size: 70%
 
 
-## Liver cancer
+## Liver
 Incidence for females
 
 ---
@@ -191,7 +191,7 @@ background-position: 50% 10%
 background-size: 70%
 
 
-## Liver cancer
+## Liver
 Incidence for males
 ---
 
@@ -203,7 +203,7 @@ background-position: 50% 10%
 background-size: 70%
 
 
-## Liver cancer
+## Liver
 Incidence for males
 ---
 
@@ -214,7 +214,7 @@ background-position: 50% 10%
 background-size: 70%
 
 
-## Melanoma cancer
+## Melanoma
 Incidence for males
 ---
 
@@ -226,8 +226,8 @@ background-position: 50% 10%
 background-size: 70%
 
 
-# Melanoma cancer
-## SIR for persons
+# Melanoma
+Incidence for males
 
 ---
 class: top, center
