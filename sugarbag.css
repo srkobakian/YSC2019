@@ -1,0 +1,73 @@
+@import url(https://fonts.googleapis.com/css?family=Arimo:300,400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700);
+
+body { font-family: 'Arimo'; }
+h1, h2, h3, h4{
+  font-family: 'Arimo';
+  font-weight: normal;
+  color: #4f2107;
+}
+a, a > code {
+  color: #1c6b1e;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.footnote {
+  position: absolute;
+  bottom: 3em;
+  padding-right: 4em;
+  font-size: 50%;
+  colour: #2d4713;
+}
+
+.remark-code-line-highlighted     { background-color: #fce300 ; }
+
+.remark-slide-content {
+  border-top: 8px solid #a2d3db;
+  border-bottom: 8px solid #a2d3db;
+  border-right: 11px solid #a2d3db;
+  border-left: 11px solid #a2d3db;
+  padding: 1em 2em 1em 2em
+}
+
+.remark-slide-content > h1 {
+  font-weight: normal;
+  margin-top: 10px;
+  margin-left: -00px;
+}
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+.remark-slide-number {
+  display: none;
+}
+
+.inverse {
+  background-color: #a2d3db;
+  color: #4f2107;
+}
+
+.inverse h1, .inverse h2, .inverse h3 {
+  color: #d69d6f;
+}
+
+.table {
+  margin: auto;
+  font-size: 90%;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+
+.title-slide h1 {
+  color: #2d4713;
+  margin-top: -70px;
+  line-height: 2.5em;
+}
+
+.title-slide h2, .title-slide h3 {
+  color: #4f9d69; 
+  line-height: 1.5em;
+}

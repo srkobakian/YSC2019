@@ -646,7 +646,7 @@ ggsave(filename = "figures/tas_6centroid1.png", plot = t6,
 t7 <- ggplot() + 
   geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2 %>% filter(sa2_name_2011 == centroid1$sa2_name_2011), fill = "grey", colour = "white") +
   theme_void() + coord_equal() +
-  geom_point(aes(x = hex_long, y = hex_lat, label = hex_angle), colour = "#1f78b4", data = hex_grid, size = 3) + 
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1f78b4", data = hex_grid, size = 3) + 
   geom_point(aes(x = focal_longitude, y = focal_latitude), data= centroid1, colour = "red", size = 6) + 
   geom_point(aes(x=longitude, y = latitude), data= centroid1, colour = "#2d4713", size = 6) 
 
@@ -673,7 +673,7 @@ centroid_allocation <- bind_rows(centroid_allocation, dplyr::bind_cols(cent, hex
 t8 <- ggplot() + 
   geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2 %>% filter(sa2_name_2011 == centroid1$sa2_name_2011), fill = "grey", colour = "white") +
   theme_void() + coord_equal() +
-  geom_point(aes(x = hex_long, y = hex_lat, label = hex_angle), colour = "#1f78b4", data = hex_grid, size = 3) + 
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1f78b4", data = hex_grid, size = 3) + 
   geom_point(aes(x = focal_longitude, y = focal_latitude), data= centroid1, colour = "red", size = 6) + 
   geom_point(aes(x=longitude, y = latitude), data= centroid1, colour = "#2d4713", size = 6) + 
   geom_point(aes(x=hex_long, y = hex_lat), data= hex, colour = "#e2850b", size = 8) 
