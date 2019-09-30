@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Arimo:300,400,700,400italic);
 @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700);
+@import url(https://fonts.googleapis.com/css?family=Shadows+Into+Light:400,700);
 
 body { font-family: 'Arimo'; }
 h1, h2, h3, h4{
@@ -8,7 +9,7 @@ h1, h2, h3, h4{
   color: #4f2107;
 }
 a, a > code {
-  color: #1c6b1e;
+  color: #d69d6f;
   font-weight: bold;
   text-decoration: none;
 }
@@ -62,12 +63,14 @@ a, a > code {
 }
 
 .title-slide h1 {
-  color: #2d4713;
-  margin-top: -70px;
-  line-height: 2.5em;
+  font-family: 'Shadows Into Light', cursive;
+  color: #d69d6f;
+  margin-top: -10px;
+  line-height: 3.5em;
 }
 
 .title-slide h2, .title-slide h3 {
-  color: #4f9d69; 
-  line-height: 1.5em;
+  font-family: 'Shadows Into Light', cursive;
+  color: #d69d6f;
+  line-height: 2.5em;
 }
