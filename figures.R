@@ -258,7 +258,7 @@ aus_melanoma_p <- left_join(fort_hex, SIR_persons_hex,
   ggplot() + 
   geom_sf(aes(fill = Melanoma_colour), colour = NA) + theme_map()
 
-ggsave(filename = "figures/aus_melanoma_p.png", plot = aus_melanoma_p,
+ggsave(filename = "figures/aus_melanoma_p_hex.png", plot = aus_melanoma_p,
        device = "png", dpi = 300,  width = 10, height = 10)
 
 
