@@ -76,7 +76,7 @@ ggsave(filename = "figures/aus_sa3.png", plot = sa3_map,
 
 ## sa2
 sa2 <- absmapsdata::sa22011 %>% 
-  filter(state_name_2011 != "Other Territories")
+  filter(state_name_2011 != "Other Territories") %>% st_transform(., crs = 3112)
 
 sa2_map <- ggplot(sa2) + 
   geom_sf(aes(fill = albers_sqkm)) +
@@ -96,27 +96,13 @@ ggsave(filename = "figures/aus_sa2.png", plot = sa2_map,
 ERP <- read_csv("data/ERP.csv")
 
 ERP_sa4 <- ERP %>% filter(`Geography Level` == "Statistical Area Level 4", Time == 2011) %>% arrange(`Geography Level`)
-  
-sa4$ERP
-  left_join(sa4, by = c("Geography Level" = "sa4_name_2011"))  %>% 
-  st_as_sf() %>% 
-  filter(!st_is_empty(geometry)) %>% 
-  cartogram_cont(.,
-    weight = "Value", itermax = 15)
-  
 
-aus_ggcont <- ggplot(sa4_cont) + 
+aus_ggcont <- ggplot(ERP_sa4) + 
   geom_sf(aes(fill = `Age-standardised rate (per 100,000)`)) + 
   scale_fill_distiller(type = "seq", palette = "Purples",  direction = 1) + 
   coord_sf(crs = CRS("+init=epsg:3112"), xlim = c(b["xmin"], b["xmax"]), ylim = c(b["ymin"], b["ymax"])) +
   theme_void()+guides(fill=FALSE)
 
-
-
-
-
-sa2 <- sa2 %>% 
-  filter((sa2_name_2011 %in% SIR$SA2_name)) 
 
 ###############################################################################
 ###########################     CANCER DATA
@@ -124,13 +110,16 @@ sa2 <- sa2 %>%
 # Cancer data for SA2 areas Australia
 SIR <- read_csv("data/SIR Downloadable Data.csv")
 
+sa2 <- sa2 %>% 
+  filter((sa2_name_2011 %in% SIR$SA2_name)) 
+save(sa2, file = "")
+
 SIR_persons <- SIR %>% 
   filter(Year=="2010-2014") %>% 
   filter(Sex_name =="Persons") %>% 
   select(Cancer_name, SA2_name, p50) %>% 
   spread(Cancer_name, p50) %>% 
   left_join(sa2, ., by = c("sa2_name_2011"="SA2_name"))
-
 
 
 SIR_females <- SIR %>% 
@@ -168,6 +157,15 @@ ggsave(filename = "figures/aus_liver_f.png", plot = aus_liver_f,
 
 
 
+aus_liver_m <- SIR_males %>% 
+  mutate(colour_SIR = map(Liver, aus_colours)) %>% 
+  ggplot() + 
+  geom_sf(aes(fill = colour_SIR)) + theme_map()
+
+ggsave(filename = "figures/aus_liver_m.png", plot = aus_liver_m,
+       device = "png", dpi = 300,  width = 10, height = 10)
+
+
 aus_lung_p <- SIR_persons %>% 
   mutate(colour_SIR = map(Lung, aus_colours)) %>% 
   ggplot() + 
@@ -175,7 +173,6 @@ aus_lung_p <- SIR_persons %>%
 
 ggsave(filename = "figures/aus_lung_p.png", plot = aus_lung_p,
   device = "png", dpi = 300,  width = 10, height = 10)
-
 
 
 aus_melanoma_p <- SIR_persons %>% 
@@ -193,21 +190,79 @@ ggsave(filename = "figures/aus_melanoma_p.png", plot = aus_melanoma_p,
 library(sugarbag)
 sf_id <- "sa2_name_2011"
 
+## Create centroids set
+#centroids <- create_centroids(sa2, "sa2_name_2011")
+## Create hexagon location grid
+#grid <- create_grid(centroids = centroids, hex_size = 0.2, buffer_dist = 12)
+## Allocate polygon centroids to hexagon grid points
+#hex_allocated <- allocate(centroids = centroids,
+#  hex_grid = grid,
+#  sf_id = "sa2_name_2011",
+#  hex_size = 0.18, # same size used in create_grid
+#  hex_filter = 10,
+#  focal_points = capital_cities,
+#  width = 30, verbose = TRUE) # same column used in create_centroids
 
-# Create centroids set
-centroids <- create_centroids(sa2, "sa2_name_2011")
-# Create hexagon location grid
-grid <- create_grid(centroids = centroids, hex_size = 0.2, buffer_dist = 12)
-# Allocate polygon centroids to hexagon grid points
-hex_allocated <- allocate(centroids = centroids,
-  hex_grid = grid,
-  sf_id = "sa2_name_2011",
-  hex_size = 0.18, # same size used in create_grid
-  hex_filter = 10,
-  focal_points = capital_cities,
-  width = 30, verbose = TRUE) # same column used in create_centroids
+#save(hex_allocated, file = "hex_allocated.rda")
+load("hex_allocated.rda")
 
-save(hex_allocated, file = "hex_allocated.rda")
+
+fort_hex <- fortify_hexagon(data = hex_allocated, sf_id = "sa2_name_2011", hex_size = 0.2) %>% 
+  sf::st_as_sf(coords = c("long", "lat"), crs=3112, agr = "constant") %>% 
+  group_by(sa2_name_2011) %>% 
+  summarize(do_union=FALSE) %>%
+  sf::st_cast("POLYGON") %>% 
+  mutate(point_type = "hexagon") 
+
+
+SIR_females_hex <- st_drop_geometry(SIR_females) %>% 
+  mutate(Liver_colour = map(Liver, aus_colours))
+
+aus_liver_f_hex <- left_join(fort_hex, SIR_females_hex,
+                             by = ("sa2_name_2011" = "sa2_name_2011")) %>% 
+  ggplot() + geom_sf(aes(fill=Liver_colour), colour = NA) + theme_map()
+
+
+ggsave(filename = "figures/aus_liver_f_hex.png", plot = aus_liver_f_hex,
+       device = "png", dpi = 300,  width = 10, height = 10)
+
+
+SIR_males_hex <- st_drop_geometry(SIR_males) %>% 
+  mutate(Liver_colour = map(Liver, aus_colours))
+
+aus_liver_m_hex <- left_join(fort_hex, SIR_males_hex,
+                             by = ("sa2_name_2011" = "sa2_name_2011")) %>% 
+  ggplot() + geom_sf(aes(fill=Liver_colour), colour = NA) + theme_map()
+
+
+ggsave(filename = "figures/aus_liver_m_hex.png", plot = aus_liver_m_hex,
+       device = "png", dpi = 300,  width = 10, height = 10)
+
+
+
+SIR_persons_hex <- st_drop_geometry(SIR_persons) %>% 
+  mutate(Lung_colour = map(Lung, aus_colours)) %>% 
+  mutate(Melanoma_colour = map(Melanoma, aus_colours))
+
+aus_lung_p_hex <- left_join(fort_hex, SIR_persons_hex,
+          by = ("sa2_name_2011" = "sa2_name_2011")) %>% 
+ ggplot() + geom_sf(aes(fill=Lung_colour), colour = NA) + theme_map()
+ 
+
+ggsave(filename = "figures/aus_lung_p_hex.png", plot = aus_lung_p_hex,
+       device = "png", dpi = 300,  width = 10, height = 10)
+
+
+aus_melanoma_p <- left_join(fort_hex, SIR_persons_hex,
+                             by = ("sa2_name_2011" = "sa2_name_2011")) %>% 
+  ggplot() + 
+  geom_sf(aes(fill = Melanoma_colour), colour = NA) + theme_map()
+
+ggsave(filename = "figures/aus_melanoma_p.png", plot = aus_melanoma_p,
+       device = "png", dpi = 300,  width = 10, height = 10)
+
+
+
 
 
 
@@ -591,9 +646,9 @@ ggsave(filename = "figures/tas_6centroid1.png", plot = t6,
 t7 <- ggplot() + 
   geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2 %>% filter(sa2_name_2011 == centroid1$sa2_name_2011), fill = "grey", colour = "white") +
   theme_void() + coord_equal() +
-  geom_point(aes(x = hex_long, y = hex_lat, label = hex_angle), colour = "#1f78b4", data = hex_grid, size = 0.75) + 
-  geom_point(aes(x = focal_longitude, y = focal_latitude), data= centroid1, colour = "red", size = 3) + 
-  geom_point(aes(x=longitude, y = latitude), data= centroid1, colour = "#2d4713", size = 3) 
+  geom_point(aes(x = hex_long, y = hex_lat, label = hex_angle), colour = "#1f78b4", data = hex_grid, size = 3) + 
+  geom_point(aes(x = focal_longitude, y = focal_latitude), data= centroid1, colour = "red", size = 6) + 
+  geom_point(aes(x=longitude, y = latitude), data= centroid1, colour = "#2d4713", size = 6) 
 
 ggsave(filename = "figures/tas_7centroid1.png", plot = t7,
   device = "png", dpi = 300,  width = 10, height = 10)
@@ -618,10 +673,10 @@ centroid_allocation <- bind_rows(centroid_allocation, dplyr::bind_cols(cent, hex
 t8 <- ggplot() + 
   geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2 %>% filter(sa2_name_2011 == centroid1$sa2_name_2011), fill = "grey", colour = "white") +
   theme_void() + coord_equal() +
-  geom_point(aes(x = hex_long, y = hex_lat, label = hex_angle), colour = "#1f78b4", data = hex_grid, size = 0.75) + 
-  geom_point(aes(x = focal_longitude, y = focal_latitude), data= centroid1, colour = "red", size = 3) + 
-  geom_point(aes(x=longitude, y = latitude), data= centroid1, colour = "#2d4713", size = 3) + 
-  geom_point(aes(x=hex_long, y = hex_lat), data= hex, colour = "#e2850b", size = 5) 
+  geom_point(aes(x = hex_long, y = hex_lat, label = hex_angle), colour = "#1f78b4", data = hex_grid, size = 3) + 
+  geom_point(aes(x = focal_longitude, y = focal_latitude), data= centroid1, colour = "red", size = 6) + 
+  geom_point(aes(x=longitude, y = latitude), data= centroid1, colour = "#2d4713", size = 6) + 
+  geom_point(aes(x=hex_long, y = hex_lat), data= hex, colour = "#e2850b", size = 8) 
 
 ggsave(filename = "figures/tas_8centroid1.png", plot = t8,
   device = "png", dpi = 300,  width = 10, height = 10)

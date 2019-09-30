@@ -147,27 +147,76 @@ background-size: 50%
 
 
 # Liver cancer across the land
-
+## SIR for females
 ---
 
 
 class:inverse, top, center
 
-background-image: url(figures/sa2_lung.png)
+background-image: url(figures/aus_liver_m.png)
+background-position: 50% 50%
+background-size: 50%
+
+
+# Liver cancer across the land
+## SIR for males
+---
+
+
+
+class:inverse, top, center
+
+background-image: url(figures/aus_liver_f_hex.png)
+background-position: 50% 50%
+background-size: 50%
+
+
+# Liver cancer across the hexagons
+## SIR for females
+---
+
+
+class:inverse, top, center
+
+background-image: url(figures/aus_liver_m_hex.png)
+background-position: 50% 50%
+background-size: 50%
+
+
+# Liver cancer across the hexagons
+## SIR for males
+---
+class:inverse, top, center
+
+background-image: url(figures/aus_lung_p.png)
 background-position: 50% 50%
 background-size: 50%
 
 
 # Lung cancer across the land
+## SIR for persons
 
 ???
 
 This is not good!
 Goals: focus on the people
 
-Does this change as we look deeper?
+---
+
+class:inverse, top, center
+
+background-image: url(figures/aus_lung_p_hex.png)
+background-position: 50% 50%
+background-size: 50%
 
 
+# Lung cancer across the hexagons
+## SIR for persons
+
+???
+
+This is not good!
+Goals: focus on the people
 
 ---
 
@@ -183,14 +232,6 @@ background-size: 90%
 ???
 When the goal is to see the population, there are several visualisation methods that have been developed.
 This display shows a contiguous cartogram, noncontiguous cartogram, dorling cartogram and a hexagon tile map.
----
-class:inverse, top, center
-
-
-background-image: url(figures/hex_lung.png)
-background-position: 50% 50%
-background-size: 50%
-
 
 ---
 class:inverse, top, center
