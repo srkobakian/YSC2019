@@ -31,7 +31,7 @@ aus_map <- ggplot(states) +
    theme(legend.position ="left", legend.title = element_text("Area (sqkm)"))
 
 ggsave(filename = "figures/aus.png", plot = aus_map,
-  device = "png", dpi = 300,  width = 10, height = 8)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 8)
 
 # Australian map with pop out
 aus_states <- ggdraw() + 
@@ -39,7 +39,7 @@ aus_states <- ggdraw() +
   draw_plot(act_map, 0.82, 0.01, 0.17, 0.3)
 
 ggsave(filename = "figures/aus_states.png", plot = aus_states,
-  device = "png", dpi = 300,  width = 10, height = 8)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 8)
 
 
 ###############################################################################
@@ -56,7 +56,7 @@ sa4_map <- ggplot(sa4) +
   theme(legend.position ="left", legend.title = element_text("Area (sqkm)"))
 
 ggsave(filename = "figures/aus_sa4.png", plot = sa4_map,
-  device = "png", dpi = 300,  width = 10, height = 8)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 8)
 
 ## sa3
 
@@ -71,7 +71,7 @@ sa3_map <- ggplot(sa3) +
    theme(legend.position ="left", legend.title = element_text("Area (sqkm)"))
 
 ggsave(filename = "figures/aus_sa3.png", plot = sa3_map,
-  device = "png", dpi = 300,  width = 10, height = 8)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 8)
 
 
 ## sa2
@@ -86,7 +86,7 @@ sa2_map <- ggplot(sa2) +
    theme(legend.position ="left", legend.title = element_text("Area (sqkm)"))
 
 ggsave(filename = "figures/aus_sa2.png", plot = sa2_map,
-  device = "png", dpi = 300,  width = 10, height = 8)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 8)
 
 
 
@@ -150,38 +150,38 @@ aus_colours <- function(sir_p50){
 aus_liver_f <- SIR_females %>% 
   mutate(colour_SIR = map(Liver, aus_colours)) %>% 
 ggplot() + 
-  geom_sf(aes(fill = colour_SIR)) + theme_map()
+  geom_sf(aes(fill = colour_SIR), colour = NA) + theme_map() + theme(plot.background = element_blank())
 
 ggsave(filename = "figures/aus_liver_f.png", plot = aus_liver_f,
-  device = "png", dpi = 300,  width = 10, height = 10)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 
 aus_liver_m <- SIR_males %>% 
   mutate(colour_SIR = map(Liver, aus_colours)) %>% 
   ggplot() + 
-  geom_sf(aes(fill = colour_SIR)) + theme_map()
+  geom_sf(aes(fill = colour_SIR), colour = NA) + theme_map() + theme(plot.background = element_blank())
 
 ggsave(filename = "figures/aus_liver_m.png", plot = aus_liver_m,
-       device = "png", dpi = 300,  width = 10, height = 10)
+       device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 aus_lung_p <- SIR_persons %>% 
   mutate(colour_SIR = map(Lung, aus_colours)) %>% 
   ggplot() + 
-  geom_sf(aes(fill = colour_SIR)) + theme_map()
+  geom_sf(aes(fill = colour_SIR), colour = NA) + theme_map() + theme(plot.background = element_blank())
 
 ggsave(filename = "figures/aus_lung_p.png", plot = aus_lung_p,
-  device = "png", dpi = 300,  width = 10, height = 10)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 aus_melanoma_p <- SIR_persons %>% 
   mutate(colour_SIR = map(Melanoma, aus_colours)) %>% 
   ggplot() + 
-  geom_sf(aes(fill = colour_SIR)) + theme_map()
+  geom_sf(aes(fill = colour_SIR), colour = NA) + theme_map() + theme(plot.background = element_blank())
 
 ggsave(filename = "figures/aus_melanoma_p.png", plot = aus_melanoma_p,
-  device = "png", dpi = 300,  width = 10, height = 10)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 
@@ -220,11 +220,11 @@ SIR_females_hex <- st_drop_geometry(SIR_females) %>%
 
 aus_liver_f_hex <- left_join(fort_hex, SIR_females_hex,
                              by = ("sa2_name_2011" = "sa2_name_2011")) %>% 
-  ggplot() + geom_sf(aes(fill=Liver_colour), colour = NA) + theme_map()
+  ggplot() + geom_sf(aes(fill=Liver_colour), colour = NA) + theme_map() + theme(plot.background = element_blank())
 
 
 ggsave(filename = "figures/aus_liver_f_hex.png", plot = aus_liver_f_hex,
-       device = "png", dpi = 300,  width = 10, height = 10)
+       device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 SIR_males_hex <- st_drop_geometry(SIR_males) %>% 
@@ -232,11 +232,11 @@ SIR_males_hex <- st_drop_geometry(SIR_males) %>%
 
 aus_liver_m_hex <- left_join(fort_hex, SIR_males_hex,
                              by = ("sa2_name_2011" = "sa2_name_2011")) %>% 
-  ggplot() + geom_sf(aes(fill=Liver_colour), colour = NA) + theme_map()
+  ggplot() + geom_sf(aes(fill=Liver_colour), colour = NA) + theme_map() + theme(plot.background = element_blank())
 
 
 ggsave(filename = "figures/aus_liver_m_hex.png", plot = aus_liver_m_hex,
-       device = "png", dpi = 300,  width = 10, height = 10)
+       device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 
@@ -246,20 +246,20 @@ SIR_persons_hex <- st_drop_geometry(SIR_persons) %>%
 
 aus_lung_p_hex <- left_join(fort_hex, SIR_persons_hex,
           by = ("sa2_name_2011" = "sa2_name_2011")) %>% 
- ggplot() + geom_sf(aes(fill=Lung_colour), colour = NA) + theme_map()
+ ggplot() + geom_sf(aes(fill=Lung_colour), colour = NA) + theme_map() + theme(plot.background = element_blank())
  
 
 ggsave(filename = "figures/aus_lung_p_hex.png", plot = aus_lung_p_hex,
-       device = "png", dpi = 300,  width = 10, height = 10)
+       device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 aus_melanoma_p <- left_join(fort_hex, SIR_persons_hex,
                              by = ("sa2_name_2011" = "sa2_name_2011")) %>% 
   ggplot() + 
-  geom_sf(aes(fill = Melanoma_colour), colour = NA) + theme_map()
+  geom_sf(aes(fill = Melanoma_colour), colour = NA) + theme_map() + theme(plot.background = element_blank())
 
 ggsave(filename = "figures/aus_melanoma_p_hex.png", plot = aus_melanoma_p,
-       device = "png", dpi = 300,  width = 10, height = 10)
+       device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 
@@ -279,7 +279,7 @@ buffer_dist <- 2
 centroids <- sugarbag::create_centroids(shp_sf = tas_sa2, sf_id = sf_id)
 
 bbox <- tibble::tibble(min = c(min(centroids$longitude), min(centroids$latitude)),
-  max = c(max(centroids$longitude), max(centroids$latitude)))0
+  max = c(max(centroids$longitude), max(centroids$latitude)))
 ########################### Tas square grid
 
 grid <- tibble::as_tibble(expand.grid(hex_long = seq(bbox$min[1] - buffer_dist,
@@ -290,22 +290,22 @@ grid <- tibble::as_tibble(expand.grid(hex_long = seq(bbox$min[1] - buffer_dist,
     hex_size)))
 
 t0 <- ggplot() + 
-  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "grey", colour = "white") + 
-  geom_point(aes(x=longitude, y = latitude), data= centroids, colour = "#2d4713") + theme_void() + 
+  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "#d69d6f", colour = "black", size = 0.01) + 
+  geom_point(aes(x=longitude, y = latitude), data = centroids, colour = "#cadbba") + theme_void() + 
   coord_equal()
 
 ggsave(filename = "figures/tas_centroids.png", plot = t0,
-  device = "png", dpi = 300,  width = 10, height = 10)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 t1 <- ggplot() + 
-  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "grey", colour = "white") + 
-  geom_point(aes(x=longitude, y = latitude), data= centroids, colour = "#2d4713") + theme_void() + 
-  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1f78b4", data = grid, size = 0.75) +
+  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "#d69d6f", colour = "black", size = 0.01) + 
+  geom_point(aes(x=longitude, y = latitude), data = centroids, colour = "#cadbba") + theme_void() + 
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1eb53c", data = grid, size = 2) +
   coord_equal()
 
 ggsave(filename = "figures/tas_1grid.png", plot = t1,
-  device = "png", dpi = 300,  width = 10, height = 10)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 ########################### Tas hexagon grid
@@ -323,13 +323,13 @@ grid <- grid %>%
 
 
 t2 <- ggplot() + 
-  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "grey", colour = "white") + 
-  geom_point(aes(x=longitude, y = latitude), data= centroids, colour = "#2d4713") + theme_void() + 
-  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1f78b4", data = grid, size = 0.75) +
+  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "#d69d6f", colour = "black", size = 0.01) + 
+  geom_point(aes(x=longitude, y = latitude), data = centroids, colour = "#cadbba") + theme_void() + 
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1eb53c", data = grid, size = 2) +
   coord_equal()
 
 ggsave(filename = "figures/tas_2hexgrid.png", plot = t2,
-  device = "png", dpi = 300,  width = 10, height = 10)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 
@@ -433,14 +433,14 @@ grid <- grid %>%
 
 
 t3 <- ggplot() + 
-   geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "grey", colour = "white") + 
-  geom_point(aes(x=longitude, y = latitude),data= centroids, colour = "#2d4713") + 
+   geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "#d69d6f", colour = "black", size = 0.01) + 
+  geom_point(aes(x=longitude, y = latitude),data = centroids, colour = "#cadbba") + 
   theme_void() + coord_equal() +
   geom_point(aes(x = hex_long, y = hex_lat), colour = "#a6cee3", data = full_grid, size = 0.25) +
-  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1f78b4", data = grid, size = 0.75)
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1eb53c", data = grid, size = 2)
 
 ggsave(filename = "figures/tas_3buffer.png", plot = t3,
-  device = "png", dpi = 300,  width = 10, height = 10)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 ## Fucntions:
@@ -575,14 +575,16 @@ hex_grid <- hex_grid %>% ungroup() %>%
 
 
 t4 <- ggplot() + 
-  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "grey", colour = "white") + 
-  geom_point(aes(x = focal_longitude, y = focal_latitude), data= centroid1, colour = "red", size = 3) +  geom_point(aes(x=longitude, y = latitude), data= centroid1, colour = "#2d4713", size = 3) + theme_void() + 
-  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1f78b4", data = grid, size = 0.75) +
-geom_point(aes(x = hex_long, y = hex_lat), colour = "#1f78b4", data = hex_grid, size = 0.75)+
-  coord_equal()
+  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "#d69d6f", colour = "black", size = 0.01) + 
+  geom_point(aes(x = focal_longitude, y = focal_latitude), data = centroid1, colour = "red", size = 4) + 
+  geom_point(aes(x=longitude, y = latitude), data = centroid1, colour = "#cadbba") + 
+  theme_void() + coord_equal() +
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#a6cee3", data = full_grid, size = 0.25) +
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1eb53c", data = hex_grid, size = 2)
+
 
 ggsave(filename = "figures/tas_4centroid1.png", plot = t4,
-  device = "png", dpi = 300,  width = 10, height = 10)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 ## ------------------------------------------------------------------------
@@ -614,15 +616,15 @@ hex_grid <- hex_grid %>%
 
 
 t5 <- ggplot() + 
-  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "grey", colour = "white") +
+  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "#d69d6f", colour = "black", size = 0.01) + 
+  geom_point(aes(x = focal_longitude, y = focal_latitude), data = centroid1, colour = "red", size = 4) + 
+  geom_point(aes(x=longitude, y = latitude),data = centroid1, colour = "#cadbba") + 
   theme_void() + coord_equal() +
-  geom_point(aes(x = hex_long, y = hex_lat), colour = "#a6cee3", data = grid, size = 0.25) +
-  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1f78b4", data = hex_grid, size = 0.75) + 
-  geom_point(aes(x=longitude, y = latitude), data= centroid1, colour = "#2d4713", size = 3) +
-  geom_point(aes(x = focal_longitude, y = focal_latitude), data= centroid1, colour = "red", size = 3)
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#a6cee3", data = full_grid, size = 0.25) +
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1eb53c", data = hex_grid, size = 2)
 
 ggsave(filename = "figures/tas_5centroid1.png", plot = t5,
-  device = "png", dpi = 300,  width = 10, height = 10)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 
@@ -642,24 +644,27 @@ if (hex_grid$angle_minus[1] < hex_grid$angle_plus[1]) {
 
 
 ## ------------------------------------------------------------------------
-t6 <- ggplot() + geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "grey", colour = "white") +
+t6 <- ggplot() + 
+  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "#d69d6f", colour = "black", size = 0.01) + 
+  geom_point(aes(x = focal_longitude, y = focal_latitude), data = centroid1, colour = "red", size = 4) + 
+  geom_point(aes(x=longitude, y = latitude),data = centroid1, colour = "#cadbba") + 
   theme_void() + coord_equal() +
-  geom_point(aes(x = hex_long, y = hex_lat), colour = "#a6cee3", data = grid, size = 0.25) +
-  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1f78b4", data = hex_grid, size = 0.75) + 
-  geom_point(aes(x = focal_longitude, y = focal_latitude), data= centroid1, colour = "red", size = 3) +    geom_point(aes(x=longitude, y = latitude), data= centroid1, colour = "#2d4713", size = 3) 
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#a6cee3", data = full_grid, size = 0.25) +
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1eb53c", data = hex_grid, size = 2)
 
 ggsave(filename = "figures/tas_6centroid1.png", plot = t6,
-  device = "png", dpi = 300,  width = 10, height = 10)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 t7 <- ggplot() + 
-  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2 %>% filter(sa2_name_2011 == centroid1$sa2_name_2011), fill = "grey", colour = "white") +
+  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2 %>% filter(sa2_name_2011 == centroid1$sa2_name_2011), fill = "#d69d6f", colour = "black", size = 0.01) +
   theme_void() + coord_equal() +
-  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1f78b4", data = hex_grid, size = 3) + 
-  geom_point(aes(x = focal_longitude, y = focal_latitude), data= centroid1, colour = "red", size = 6) + 
-  geom_point(aes(x=longitude, y = latitude), data= centroid1, colour = "#2d4713", size = 6) 
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#c3add8", data = hex_grid, size = 2) +
+  geom_point(aes(x = focal_longitude, y = focal_latitude), data = centroid1, colour = "red", size = 7) + 
+  geom_point(aes(x = longitude, y = latitude), data = centroid1, colour = "#cadbba", size = 5) 
+
 
 ggsave(filename = "figures/tas_7centroid1.png", plot = t7,
-  device = "png", dpi = 300,  width = 10, height = 10)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 ## ------------------------------------------------------------------------
 
 # Choose first available point
@@ -679,15 +684,15 @@ centroid_allocation <- bind_rows(centroid_allocation, dplyr::bind_cols(cent, hex
 
 
 t8 <- ggplot() + 
-  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2 %>% filter(sa2_name_2011 == centroid1$sa2_name_2011), fill = "grey", colour = "white") +
+  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2 %>% filter(sa2_name_2011 == centroid1$sa2_name_2011), fill = "#d69d6f", colour = "black", size = 0.01) +
   theme_void() + coord_equal() +
-  geom_point(aes(x = hex_long, y = hex_lat), colour = "#1f78b4", data = hex_grid, size = 3) + 
-  geom_point(aes(x = focal_longitude, y = focal_latitude), data= centroid1, colour = "red", size = 6) + 
-  geom_point(aes(x=longitude, y = latitude), data= centroid1, colour = "#2d4713", size = 6) + 
-  geom_point(aes(x=hex_long, y = hex_lat), data= hex, colour = "#e2850b", size = 8) 
+  geom_point(aes(x = hex_long, y = hex_lat), colour = "#c3add8", data = hex_grid, size = 3) +
+  geom_point(aes(x = focal_longitude, y = focal_latitude), data = centroid1, colour = "red", size = 7) + 
+  geom_point(aes(x = longitude, y = latitude), data = centroid1, colour = "#cadbba", size = 5) + 
+  geom_point(aes(x = hex_long, y =  hex_lat), data = hex, colour = "#cadbba", size = 7) 
 
 ggsave(filename = "figures/tas_8centroid1.png", plot = t8,
-  device = "png", dpi = 300,  width = 10, height = 10)
+  device = "png", bg = "transparent", dpi = 300,  width = 10, height = 10)
 
 
 ## ----fullhexmap----------------------------------------------------------
@@ -704,21 +709,30 @@ hex_allocated <- allocate(centroids = centroids,
   focal_points = tibble(points= "Hobart", longitude = 147.32941, latitude = -42.87936),
   width = 30, verbose = FALSE) # same column used in create_centroids
 
+## if long lat is preferred to UTM, and not in proj4string:
+projstring <- "+init=epsg:3112 +proj=longlat +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=134 +x_0=0 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs"
 
-## ------------------------------------------------------------------------
-h1 <- hex_allocated %>%
-  fortify_hexagon(hex_size = 0.2, sf_id = sf_id) %>%
-  left_join(., tas_sa2)
+st_transform()
 
-p1 <- fortify_sfc(tas_sa2)
+# create sf hexagons
+fort_hex <- fortify_hexagon(data = hex_allocated, sf_id = "sa2_name_2011", hex_size = 0.2) %>%
+  sf::st_as_sf(coords = c("long", "lat"), crs=projstring, agr = "constant") %>%
+  group_by(sa2_name_2011) %>%
+  summarize(do_union=FALSE) %>%
+  sf::st_cast("POLYGON") 
+
+all_areas <- bind_rows("hexagons" = fort_hex, "geography" = tas_sa2)
+
+
+
 
 end_hex <- ggplot() +
   geom_polygon(data = p1, aes(x=long, lat, group = interaction(sa2_name_2011, polygon)), alpha = 0.1) +
-  geom_polygon(data = h1, aes(x=long, lat, group = sa2_name_2011), fill = "#2d4713") + theme_void() + coord_equal()
+  geom_polygon(data = h1, aes(x=long, lat, group = sa2_name_2011), fill = "#cadbba") + theme_void() + coord_equal()
 
 end_cents <- ggplot() + 
-  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "grey", colour = "white") + 
-  geom_point(aes(x=longitude, y = latitude), data= centroids, colour = "#2d4713", size = 2) + theme_void() + 
+  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), data = fort_sa2, fill = "#d69d6f", colour = "black", size = 0.01) + 
+  geom_point(aes(x=longitude, y = latitude), data = centroids, colour = "#cadbba", size = 2) + theme_void() + 
   coord_equal()
 
 
@@ -726,9 +740,7 @@ full <- full_join(h1,p1)
 
 library(gganimate)
 full_anim <- ggplot(full) +  
-  geom_polygon(aes(x = long, y = lat, group = interaction(sa2_name_2011, polygon)), fill = "grey", colour = "white") +
-  transition_states(poly_type, transition_length = 3, state_length = 1) +
-  enter_fade() +
-  exit_fade()
+  geom_polygon(aes(x = long, y = lat, group = sa2_name_2011, subgroup = polygon), fill = "#d69d6f", colour = "black", size = 0.01) +
+  transition_states(poly_type, transition_length = 3, state_length = 1) 
 
 animate(full_anim)
